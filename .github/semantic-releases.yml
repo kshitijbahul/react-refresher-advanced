@@ -1,0 +1,22 @@
+name: 
+run-name: ${{}}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  tag-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Semantic Release 
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
