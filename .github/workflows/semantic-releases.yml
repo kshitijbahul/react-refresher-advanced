@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} made a commit, building new version for ${{ github
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   tag-commit:
     runs-on: ubuntu-latest
