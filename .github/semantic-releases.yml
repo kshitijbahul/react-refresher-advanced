@@ -1,5 +1,5 @@
-name: 
-run-name: ${{}}
+name: semantic-releases-on-commit
+run-name: ${{ github.actor }} made a commit, building new version for ${{ github.repository }}
 on:
   push:
     branches:
