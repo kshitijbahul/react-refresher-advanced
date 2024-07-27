@@ -6,8 +6,9 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     GithubAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { set } from "firebase/database";
 
 
 import {
@@ -22,7 +23,7 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-};
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -39,11 +40,13 @@ githubProvider.setCustomParameters(
 
 const auth = getAuth(app);
 const signInPopup = (provider) => signInWithPopup(auth, provider);
+const signInGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 
 const db = getFirestore(app);
 
-const createUserDocFromAuth = async (userAuth) => {
+const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
+    if (! userAuth) return ;
     const userDocRef = doc(db, 'users', userAuth.uid)
     console.log('userDocRef is ', userDocRef);
     const userSnapShot = await getDoc(userDocRef);
@@ -55,6 +58,7 @@ const createUserDocFromAuth = async (userAuth) => {
                 displayName: userAuth.displayName,
                 email: userAuth.email,
                 createdAt: new Date(),
+                ...additionalInfo,
             });
         }catch (error) {
             console.error('Error creating user', error.message);
@@ -64,10 +68,36 @@ const createUserDocFromAuth = async (userAuth) => {
 }
 
 
+const createAuthUserWithEmailAndPassword = async ({ email, password }) => {
+    if (! email || ! password) return ;
+    console.log('email is ', email);
+    try {
+        const response = await createUserWithEmailAndPassword(auth, email, password);
+        console.log('User with createAuthUserWithEmailAndPassword is ', response);
+        return response
+    } catch (error) {
+        console.error('Error creating user', error.message);
+    }
+}
+
+const signInWithEmail = async ( email, password) => {
+    if (! email || ! password) return ;
+    try {
+        const response = await signInWithEmailAndPassword(auth, email, password);
+        console.log('User with signInWithEmailAndPassword is ', response);
+        return response;
+    } catch (error) {
+        console.error('Error signing in user', error.message);
+    }
+}
+
 export {
     auth,
     googleProvider,
     githubProvider,
     createUserDocFromAuth,
     signInPopup,
+    signInGoogleRedirect,
+    signInWithEmail,
+    createAuthUserWithEmailAndPassword,
 }
