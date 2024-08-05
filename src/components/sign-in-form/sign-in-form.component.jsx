@@ -32,6 +32,18 @@ const SignIn = () => {
             resetFormFields();
         } catch (error) {
             console.error('Error signing in with Email', error.message);
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    alert('Invalid Email');
+                    break;
+                case 'auth/invalid-credential':
+                    alert('Incorrect Password');
+                    break;
+                default:
+                    console.log('Error Code is ', error.code);
+                    alert('Error signing in with Email', error.message);
+            }
+
         }
         
     }
@@ -53,7 +65,7 @@ const SignIn = () => {
                 <FormInput label = 'Password' required  name='password' type= 'password' value={password} onChange= {handleFormChange}/>
                 <div className='buttons-container'>
                     <Button type ='submit'>SIGN IN</Button>
-                    <Button buttonType='google' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
+                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
                 </div> 
             </form>
         </div>
