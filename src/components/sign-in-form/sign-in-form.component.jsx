@@ -7,7 +7,7 @@ import Button from '../button/button.component';
 
 import './sign-in-form.styles.scss';
 
-import {signInWithEmail, signInPopup, googleProvider, createUserDocFromAuth } from '../../utils/firebase/firebase.utils';
+import {signInWithEmail, signInPopup, googleProvider } from '../../utils/firebase/firebase.utils';
 
 const defaultFormFields = {
     email: '',
@@ -54,7 +54,6 @@ const SignIn = () => {
         try{
             const responseGoogle = await signInPopup(googleProvider);
             console.log('User Logged in with Google', responseGoogle);
-            createUserDocFromAuth(responseGoogle.user);
         }catch(error){ 
             console.error('Error signing in with Google', error.message);
         }
