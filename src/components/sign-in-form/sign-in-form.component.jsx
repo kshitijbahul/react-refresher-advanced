@@ -1,8 +1,10 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+
+import { UserContext } from '../../context/user.context';
 
 import './sign-in-form.styles.scss';
 
@@ -15,6 +17,7 @@ const defaultFormFields = {
 const SignIn = () => {
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const {email, password} = formFields;
+    const { setCurrentUser } = useContext(UserContext);
     const handleFormChange = (event) => {
         const {name,value} = event.target;
         setFormFields({...formFields, [name]: value});
@@ -29,6 +32,8 @@ const SignIn = () => {
             console.log('Form Submitted');
             const { user } = await signInWithEmail(email, password);
             console.log('User Logged in with Email', user);
+            setCurrentUser(user);
+            console.log('Saved user login details ', user);
             resetFormFields();
         } catch (error) {
             console.error('Error signing in with Email', error.message);

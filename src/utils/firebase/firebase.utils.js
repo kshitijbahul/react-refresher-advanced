@@ -8,6 +8,8 @@ import {
     GithubAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
 } from 'firebase/auth';
 
 
@@ -23,7 +25,8 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  };
+  
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -82,14 +85,17 @@ const createAuthUserWithEmailAndPassword = async ({ email, password }) => {
 
 const signInWithEmail = async ( email, password) => {
     if (! email || ! password) return ;
-    try {
-        const response = await signInWithEmailAndPassword(auth, email, password);
-        console.log('User with signInWithEmailAndPassword is ', response);
-        return response;
-    } catch (error) {
-        console.error('Error signing in user', error.message);
-    }
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    console.log('User with signInWithEmailAndPassword is ', response);
+    return response;
 }
+
+const signOutUser = async () => signOut(auth);
+
+const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback); 
+
+
+
 
 export {
     auth,
@@ -100,4 +106,6 @@ export {
     signInGoogleRedirect,
     signInWithEmail,
     createAuthUserWithEmailAndPassword,
+    signOutUser,
+    onAuthStateChangedListener,
 }
