@@ -14,13 +14,13 @@ export const UserProvider = ({children}) => {
     const [ currentUser, setCurrentUser ] = useState(null);
     const contextValue = { currentUser, setCurrentUser }
     
-    /* useEffect(() => {
+    useEffect(() => {
         const unsubscribe = onAuthStateChangedListener((user)=> {
             console.log('User Logged In .. ', user);
             setCurrentUser(user);
         });
         return unsubscribe;
-    },[]) */
+    },[])
 
     // i.e UserContext.Provider is allowing any of the children 
     // to access the value in the useState() of the UserContext component
