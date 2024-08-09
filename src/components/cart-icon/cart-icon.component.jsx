@@ -7,10 +7,10 @@ import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 
 
 const CartIcon = () => {
-    const { cartOpened , setCartOpened, cartSize } = useContext(CartContext);
+    const { toggleCart, cartSize } = useContext(CartContext);
     const toggleCartDisplay = () => {
         console.log('Toggle Cart Display');
-        setCartOpened(!cartOpened);
+        toggleCart();
       };
     return (
         <div className='cart-icon-container'>
