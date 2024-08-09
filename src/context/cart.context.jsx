@@ -34,8 +34,10 @@ export const CartProvider = ({children}) => {
     const [ cartValue, setCartValue ] = useState(0);
     useEffect(() => {
         const cartItemCount = cartItems.reduce((cartCount,eachCartItem) => cartCount+eachCartItem.quantity ,0);
-        console.log('The Card Item count in the effect is ', cartItemCount);
         setCartSize(cartItemCount);
+    },[cartItems]);
+    // goood to have single responsibility in the useEffect
+    useEffect(() => {
         const totalPrice = cartItems.reduce (((cartCost,cartItem) => cartCost + (cartItem.quantity * cartItem.price )),0);
         setCartValue(totalPrice);
     },[cartItems]);
