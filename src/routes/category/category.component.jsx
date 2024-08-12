@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CategoryContext } from "../../context/category.context";
 import ProductCard from '../../components/product-card/product-card.component';
 
-import './category.styles.scss';
+import {CategoryContainer, Title } from './category.styles.jsx';
 
 const Category = () => {
     const { category } = useParams(); 
@@ -15,10 +15,10 @@ const Category = () => {
     }, [category, categoriesMap]);
     return (
         <Fragment>
-            <h2 className='category-title'>
+            <Title>
                     {category.toUpperCase()}
-            </h2>
-            <div className='category-container'>
+            </Title>
+            <CategoryContainer>
                 
                 {   
                     // Added a check for products since products is loaded async and on the first render it can be empty
@@ -27,7 +27,7 @@ const Category = () => {
                         (categoryItem) => (<ProductCard key={categoryItem.id} product = {categoryItem} />)
                     )
                 }
-            </div>
+            </CategoryContainer>
         </Fragment>
     );
 }
