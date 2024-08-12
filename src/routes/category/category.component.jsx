@@ -1,4 +1,4 @@
-import { useContext, useState,useEffect } from 'react';
+import { useContext, useState,useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { CategoryContext } from "../../context/category.context";
@@ -14,18 +14,21 @@ const Category = () => {
         setProducts(categoriesMap[category]);
     }, [category, categoriesMap]);
     return (
-        <div className='category-container'>
-            <h1 className='title'>
-                {category.toUpperCase()}
-            </h1>
-            {   
-                // Added a check for products since products is loaded async and on the first render it can be empty
-                // this is a good practice to avoid errors
-                products && products.map(
-                    (categoryItem) => (<ProductCard key={categoryItem.id} product = {categoryItem} />)
-                )
-            }
-        </div>
+        <Fragment>
+            <h2 className='category-title'>
+                    {category.toUpperCase()}
+            </h2>
+            <div className='category-container'>
+                
+                {   
+                    // Added a check for products since products is loaded async and on the first render it can be empty
+                    // this is a good practice to avoid errors
+                    products && products.map(
+                        (categoryItem) => (<ProductCard key={categoryItem.id} product = {categoryItem} />)
+                    )
+                }
+            </div>
+        </Fragment>
     );
 }
 
