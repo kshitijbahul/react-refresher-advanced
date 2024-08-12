@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button , { BUTTON_TYPE_CLASSES} from '../button/button.component';
 
 
 import './sign-in-form.styles.scss';
@@ -67,7 +67,7 @@ const SignIn = () => {
                 <FormInput label = 'Password' required  name='password' type= 'password' value={password} onChange= {handleFormChange}/>
                 <div className='buttons-container'>
                     <Button type ='submit'>SIGN IN</Button>
-                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
+                    <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
                 </div> 
             </form>
         </div>
