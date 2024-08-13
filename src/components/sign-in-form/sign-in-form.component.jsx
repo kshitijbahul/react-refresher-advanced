@@ -27,7 +27,7 @@ const SignIn = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { user } = await signInWithEmail(email, password);
+            await signInWithEmail(email, password);
             resetFormFields();
         } catch (error) {
             console.error('Error signing in with Email', error.message);
@@ -48,7 +48,7 @@ const SignIn = () => {
     }
     const signInWithGoogle =async  () => {
         try{
-            const responseGoogle = await signInPopup(googleProvider);
+            await signInPopup(googleProvider);
         }catch(error){ 
             console.error('Error signing in with Google', error.message);
         }
