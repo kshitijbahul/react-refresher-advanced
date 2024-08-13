@@ -5,7 +5,7 @@ import FormInput from '../form-input/form-input.component';
 import Button , { BUTTON_TYPE_CLASSES} from '../button/button.component';
 
 
-import './sign-in-form.styles.scss';
+import {SignInContainer, Title, SignInFormButtons} from './sign-in-form.styles.jsx';
 
 import {signInWithEmail, signInPopup, googleProvider } from '../../utils/firebase/firebase.utils';
 
@@ -59,18 +59,18 @@ const SignIn = () => {
         }
     }
     return (
-        <div className='sign-in-container'>
-            <h2>I already have an account</h2>
+        <SignInContainer>
+            <Title>I already have an account</Title>
             <span>Sign In with your email and password</span>
             <form className='sign-in-form' onSubmit={handleFormSubmit}>
                 <FormInput label='Email' required type ='email' name='email' value= {email} onChange= {handleFormChange}/>
                 <FormInput label = 'Password' required  name='password' type= 'password' value={password} onChange= {handleFormChange}/>
-                <div className='buttons-container'>
+                <SignInFormButtons>
                     <Button type ='submit'>SIGN IN</Button>
                     <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
-                </div> 
+                </SignInFormButtons> 
             </form>
-        </div>
+        </SignInContainer>
     );
 };
 
