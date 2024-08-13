@@ -28,7 +28,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: "retrorise-selflearning.firebaseapp.com",
+    projectId: "retrorise-selflearning",
+    storageBucket: "retrorise-selflearning.appspot.com",
+    messagingSenderId: "695642654421",
+    appId: "1:695642654421:web:5377730e73ce960f0a845c"
 };
 
 // Initialize Firebase
