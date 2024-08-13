@@ -27,10 +27,7 @@ const SignIn = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            console.log('Form Submitted');
             const { user } = await signInWithEmail(email, password);
-            console.log('User Logged in with Email', user);
-            console.log('Saved user login details ', user);
             resetFormFields();
         } catch (error) {
             console.error('Error signing in with Email', error.message);
@@ -42,7 +39,7 @@ const SignIn = () => {
                     alert('Incorrect Password');
                     break;
                 default:
-                    console.log('Error Code is ', error.code);
+                    console.error('Error Code is ', error.code);
                     alert('Error signing in with Email', error.message);
             }
 
@@ -50,10 +47,8 @@ const SignIn = () => {
         
     }
     const signInWithGoogle =async  () => {
-        console.log('Sign In with Google');
         try{
             const responseGoogle = await signInPopup(googleProvider);
-            console.log('User Logged in with Google', responseGoogle);
         }catch(error){ 
             console.error('Error signing in with Google', error.message);
         }

@@ -32,7 +32,6 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword({ email, password });
             const savedUser = await createUserDocFromAuth(user, { displayName });
-            console.log('User Stored in Firestore', savedUser);
             resetFormFields();
             alert('User Created');
         } catch (error) {

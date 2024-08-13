@@ -8,7 +8,6 @@ import {CartIconContainer, ShoppingIcon,ItemCount} from './cart-icon.styles.jsx'
 const CartIcon = () => {
     const { toggleCart, cartSize } = useContext(CartContext);
     const toggleCartDisplay = () => {
-        console.log('Toggle Cart Display');
         toggleCart();
       };
     return (

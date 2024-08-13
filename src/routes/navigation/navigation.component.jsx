@@ -15,7 +15,6 @@ const Navigation = () => {
     const { cartOpened  } = useContext(CartContext);
     const signOutHandler = async () => {
       const response = await signOutUser();
-      console.log('User Signed Out', response);
     };
     
 
