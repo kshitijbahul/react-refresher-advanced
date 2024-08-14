@@ -7,7 +7,7 @@ const DirectoryItem = ({category}) => {
     const { id, title, imageUrl } = category;
     return (
         <DirectoryItemContainer key={id} onClick={categoryClickHandler}>
-            <BackgroundImage imageUrl={imageUrl} />
+            <BackgroundImage imagelink={imageUrl} />
             <Body>
               <h2>{title}</h2>
               <p>Shop Now</p>

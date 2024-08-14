@@ -8,7 +8,7 @@ export const SignInContainer = styled.div`
 export const Title = styled.h2`
   margin: 10px 0;
 `;
-export const SignInFormButtons = styled.form`
+export const FormButtons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;

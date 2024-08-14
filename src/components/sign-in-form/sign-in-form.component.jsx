@@ -5,7 +5,7 @@ import FormInput from '../form-input/form-input.component';
 import Button , { BUTTON_TYPE_CLASSES} from '../button/button.component';
 
 
-import {SignInContainer, Title, SignInFormButtons} from './sign-in-form.styles.jsx';
+import {SignInContainer, Title, FormButtons} from './sign-in-form.styles.jsx';
 
 import {signInWithEmail, signInPopup, googleProvider } from '../../utils/firebase/firebase.utils';
 
@@ -60,10 +60,10 @@ const SignIn = () => {
             <form className='sign-in-form' onSubmit={handleFormSubmit}>
                 <FormInput label='Email' required type ='email' name='email' value= {email} onChange= {handleFormChange}/>
                 <FormInput label = 'Password' required  name='password' type= 'password' value={password} onChange= {handleFormChange}/>
-                <SignInFormButtons>
+                <FormButtons>
                     <Button type ='submit'>SIGN IN</Button>
                     <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</Button>
-                </SignInFormButtons> 
+                </FormButtons> 
             </form>
         </SignInContainer>
     );
