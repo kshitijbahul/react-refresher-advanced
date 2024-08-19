@@ -1,0 +1,1 @@
+export const selectCategories = (state) => state.categories.categoriesMap; // This is a selector function
