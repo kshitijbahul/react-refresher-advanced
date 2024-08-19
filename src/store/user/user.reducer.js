@@ -1,9 +1,9 @@
-
+import { USER_ACTION_TYPES } from "./user.types";
 /// This is same as what we had in context but some changes 
 
 
-export const USER_ACTION_TYPES = {
-    SET_CURRENT_USER: 'SET_CURRENT_USER',
+const INITIAl_STATE = {
+    currentUser: null,
 }
 
 
@@ -40,7 +40,4 @@ export const userReducer = (state = INITIAl_STATE , action) => {
             return state;
     }
     
-}
-const INITIAl_STATE = {
-    currentUser: null,
 }
