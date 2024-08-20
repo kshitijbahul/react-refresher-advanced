@@ -1,1 +1,8 @@
-export const selectCategories = (state) => state.categories.categoriesMap; // This is a selector function
+export const selectCategoriesMap = (state) => {
+    return state.categories.categories.reduce((acc, category)=> {
+        const {title, items } = category;
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {});
+    
+} // This is a selector function
