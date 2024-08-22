@@ -4,7 +4,26 @@ import { logger } from 'redux-logger';
 import { rootReducer } from './root-reducer';
 // rootReducer
 
-const middleware = [logger];
+
+
+// Example of a curry function 
+const loggerMiddleware = (store) => (next) => (action) => {
+    
+    if (!action.type){
+        return next(action)
+    }
+    console.log('Type ', action.type);
+    console.log('Payload ', action.payload);
+    console.log('State before ', store.getState());
+    
+    next(action);
+
+    console.log('Next State after ', store.getState());
+
+
+}
+
+const middleware = [loggerMiddleware];
 
 const composedEnhancers = compose(applyMiddleware(...middleware));
 

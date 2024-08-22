@@ -6,7 +6,7 @@ const INITIAl_STATE = {
 
 export const categoryReducer = (state = INITIAl_STATE, action) => {
     const { type, payload } = action;
-    console.log('in the reducer', action);
+    console.log('categoryReducer called with ', action);
     switch (type) {
         case CATEGORY_ACTION_TYPES.SET_CATEGORIES:
             return {
