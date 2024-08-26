@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 const selectCategoryReducer = (state) => state.categories; 
 
-const selectCategories = (state) => createSelector(
+const selectCategories = createSelector(
     [selectCategoryReducer], // This is an input selector
     (categoriesSlice) => categoriesSlice.categories // This is the output selector i.e when the categories has not chnaged on the Root state, it will return the same value
 )
