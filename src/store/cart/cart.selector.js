@@ -1,14 +1,14 @@
 import { createSelector } from "reselect";
 
-const selectCart = (state) =>  state.cart;
+const selectCartReducer = (state) =>  state.cart;
 
 export const selectCartItems = createSelector(
-    [selectCart],
+    [selectCartReducer],
     (cart) => cart.cartItems
 )
 
 export const selectCartOpened = createSelector(
-    [selectCart],
+    [selectCartReducer],
     (cart) => cart.cartOpened
 )
 
