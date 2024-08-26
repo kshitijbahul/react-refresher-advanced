@@ -1,39 +1,5 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { createContext, useReducer } from "react";
-
-const addCartItem = (cartItems, productToAdd) => {
-    const existingItem = cartItems.find(
-        (eachItem) => eachItem.id === productToAdd.id
-    );
-    if(existingItem){
-        return cartItems.map(
-            (eachItem) =>  eachItem.id === productToAdd.id ? {...eachItem, quantity : eachItem.quantity+1} : eachItem
-            
-        );
-    }
-    return [...cartItems, {...productToAdd, quantity: 1}];
-    
-}
-
-export const CART_ACTION_TYPES = {
-    SET_CART_ITEMS : 'SET_CART_ITEMS',
-    
-}
-const removeCartItem = (cartItems,removedProduct) => {
-    return cartItems.filter(( cardItem )=> cardItem.id !== removedProduct.id);
-}
-const decreaseCartItem = (cartItems,removedProduct) =>  {
-    const cartElement = cartItems.find((cartItem) => cartItem.id === removedProduct.id );
-    if (cartElement.quantity === 1) {
-        return removeCartItem(cartItems,removedProduct);
-    } else {
-        const newCartItems = cartItems.map((cartItem) => 
-            cartItem.id === removedProduct.id ? {...cartItem,quantity: cartItem.quantity-1} : cartItem
-        );
-        return newCartItems;
-    }
-    }
-    
+   
 const INITIAL_STATE = {
     cartOpened: false,
     cartItems: [],

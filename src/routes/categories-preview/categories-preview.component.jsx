@@ -5,7 +5,7 @@ import CategoryPreview from "../../components/category-preview/category-preview.
 
 const CategoriesPreview = () => {
     const categoriesMap  = useSelector(selectCategoriesMap);
-    console.log('categoriesMap', categoriesMap);
+    console.log('categoriesMap >>>>>>>>>', categoriesMap);
     return (
     <div className="category-preview-container">
         {

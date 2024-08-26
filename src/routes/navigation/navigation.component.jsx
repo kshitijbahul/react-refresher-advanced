@@ -6,7 +6,7 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 import { ReactComponent as SiteLogo } from '../../assets/crown.svg';
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.components";
-import { CartContext } from '../../context/cart.context';
+import { selectCartOpened } from "../../store/cart/cart.selector";
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 // import './navigation.styles.jsx';
@@ -14,11 +14,10 @@ import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigat
 
 const Navigation = () => {
     const currentUser = useSelector(selectCurrentUser);
-    const { cartOpened  } = useContext(CartContext);
+    const cartOpened = useSelector(selectCartOpened)
     const signOutHandler = async () => {
        await signOutUser();
     };
-    
 
     return (
     <Fragment>
