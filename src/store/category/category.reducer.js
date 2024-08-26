@@ -4,7 +4,7 @@ const INITIAl_STATE = {
     categories: [],
 }
 
-export const categoryReducer = (state = INITIAl_STATE, action) => {
+export const categoryReducer = (state = INITIAl_STATE, action ={}) => {
     const { type, payload } = action;
     console.log('categoryReducer called with ', action);
     switch (type) {

@@ -16,7 +16,7 @@ const INITIAl_STATE = {
     Hence we now pass the initial value of the state as the default value
 */
 //const userReducer = (state , action) => {
-export const userReducer = (state = INITIAl_STATE , action) => {
+export const userReducer = (state = INITIAl_STATE , action ={}) => {
     const { type, payload } = action;
     switch(type){
         case USER_ACTION_TYPES.SET_CURRENT_USER:
