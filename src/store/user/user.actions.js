@@ -27,7 +27,7 @@ export const googleSignInStart = () => {
     }
 }
 
-export const emailSigninStart = (email, password) => {
+export const emailSignInStart = (email, password) => {
     return {
         type: USER_ACTION_TYPES.EMAIL_SIGNIN_START,
         payload: {email, password},

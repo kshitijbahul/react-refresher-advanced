@@ -1,21 +1,23 @@
 
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
-import Button , { BUTTON_TYPE_CLASSES} from '../button/button.component';
+import Button , { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 
-import {SignInContainer, Title, FormButtons} from './sign-in-form.styles.jsx';
+import { SignInContainer, Title, FormButtons } from './sign-in-form.styles.jsx';
 
-import {signInWithEmail, signInPopup, googleProvider } from '../../utils/firebase/firebase.utils';
+import { signInWithEmail, signInPopup, googleProvider } from '../../utils/firebase/firebase.utils';
+import { googleSignInStart, emailSignInStart } from '../../store/user/user.actions';
 
 const defaultFormFields = {
     email: '',
     password: '',
 };
 const SignIn = () => {
+    const dispatach = useDispatch();
     const [ formFields, setFormFields ] = useState(defaultFormFields);
-    const {email, password} = formFields;
+    const { email, password } = formFields;
     const handleFormChange = (event) => {
         const {name,value} = event.target;
         setFormFields({...formFields, [name]: value});
@@ -27,7 +29,7 @@ const SignIn = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            await signInWithEmail(email, password);
+            dispatach(emailSignInStart(email, password));
             resetFormFields();
         } catch (error) {
             console.error('Error signing in with Email', error.message);
@@ -48,7 +50,7 @@ const SignIn = () => {
     }
     const signInWithGoogle =async  () => {
         try{
-            await signInPopup(googleProvider);
+            dispatach(googleSignInStart());
         }catch(error){ 
             console.error('Error signing in with Google', error.message);
         }

@@ -51,6 +51,7 @@ githubProvider.setCustomParameters(
 
 const auth = getAuth(app);
 const signInPopup = (provider) => signInWithPopup(auth, provider);
+const signInWithGooglePopup = () => signInPopup(googleProvider);
 const signInGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 
@@ -137,6 +138,7 @@ export {
     githubProvider,
     createUserDocFromAuth,
     signInPopup,
+    signInWithGooglePopup,
     signInGoogleRedirect,
     signInWithEmail,
     createAuthUserWithEmailAndPassword,
