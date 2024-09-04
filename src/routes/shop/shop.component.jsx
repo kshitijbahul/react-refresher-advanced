@@ -4,15 +4,17 @@ import { Routes, Route } from "react-router-dom";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import Category from "../category/category.component";
 
-import { fetchCategoriesAsync } from '../../store/category/category.actions';
+import { fetchCategoriesStart } from '../../store/category/category.actions';
 
 
 
 const Shop = () => {
   const dispatch = useDispatch();
   useEffect( ()=> {
-    // Dispatch to a thunk action creator, which will further dispatch
-    dispatch(fetchCategoriesAsync());
+    // Commented the Thunk dispatch to test Sagas
+    // dispatch(fetchCategoriesAsync());
+    // Dispatching fetchCategoriesStart since the Saga will listen to that 
+    dispatch(fetchCategoriesStart());
   });
   return (
     <Routes>

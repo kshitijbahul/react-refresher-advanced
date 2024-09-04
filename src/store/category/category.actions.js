@@ -9,20 +9,20 @@ export const getCategories = () => {
 
 
 
-const fetchCategoriesStart = () => {
+export const fetchCategoriesStart = () => {
     return {
         type: CATEGORY_ACTION_TYPES.FETCH_CATEGORY_START,
     }
 }
 
-const fetchCategoriesSuccess = (categories) => {
+export const fetchCategoriesSuccess = (categories) => {
     return {
         type: CATEGORY_ACTION_TYPES.FETCH_CATEGORY_SUCCESS,
         payload: categories,
     }
 }
 
-const fetchCategoriesFailed = (error) => {
+export const fetchCategoriesFailed = (error) => {
     return {
         type: CATEGORY_ACTION_TYPES.FETCH_CATEGORY_FAILED,
         payload: error,
