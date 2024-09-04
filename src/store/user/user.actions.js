@@ -41,8 +41,49 @@ export const signInSuccess = (userData) => {
     }
 }
 
-export const signInFailed = () => {
+export const signInFailed = (error) => {
     return {
         type: USER_ACTION_TYPES.SIGNIN_FAILED,
+        payload: error
+    }
+}
+
+export function signUpStart(email, password, displayName){
+    return {
+        type: USER_ACTION_TYPES.SIGNUP_START,
+        payload: {email, password, displayName},
+    }
+}
+
+export function signUpSuccess(user, additionalInfo){
+    return {
+        type: USER_ACTION_TYPES.SIGNUP_SUCCESS,
+        payload: {user,additionalInfo},
+    }
+}
+export function signUpFailed(error){
+    return {
+        type: USER_ACTION_TYPES.SIGNUP_FAILED,
+        payload: error,
+    }
+}
+
+export function signOutStart(){
+    return {
+        type: USER_ACTION_TYPES.SIGNOUT_START,
+    }
+}
+
+export function signOutSuccess(){
+    return {
+        type: USER_ACTION_TYPES.SIGNOUT_SUCCESS,
+        payload: null,
+    }
+}
+
+export function signOutFailed(error){
+    return {
+        type: USER_ACTION_TYPES.SIGNOUT_FAILED,
+        payload: error,
     }
 }

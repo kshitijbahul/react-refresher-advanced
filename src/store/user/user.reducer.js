@@ -26,7 +26,14 @@ export const userReducer = (state = INITIAl_STATE , action ={}) => {
                 ...state, // Get everything in the state , and only update the values that you need to update
                 currentUser: payload,
             };
+        case USER_ACTION_TYPES.SIGNOUT_SUCCESS:
+            return {
+                ...state,
+                currentUser: null,
+            }
         case USER_ACTION_TYPES.SIGNIN_FAILED:
+        case USER_ACTION_TYPES.SIGNOUT_FAILED:
+        case USER_ACTION_TYPES.SIGNUP_FAILED:
             return {
                 ...state, // Get everything in the state , and only update the values that you need to update
                 error: payload,
