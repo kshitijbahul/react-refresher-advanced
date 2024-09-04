@@ -2,15 +2,13 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-
-import {onAuthStateChangedListener, createUserDocFromAuth} from '../src/utils/firebase/firebase.utils';
 import Home from './routes/home/home.component';
 import Navigation from './routes/navigation/navigation.component';
 import SignIn from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
 
-import { setCurrentUser } from './store/user/user.actions';
+import { checkUserSession } from './store/user/user.actions';
  
 const App = () => {
   // We use the redux-dispatch to get a hook
@@ -19,15 +17,8 @@ const App = () => {
   // which takes the action object and 
   // passes it on to all the reducers
   const dispatch = useDispatch()
-
   useEffect(() => {
-      const unsubscribe = onAuthStateChangedListener((user)=> {
-          if (user) {
-              createUserDocFromAuth(user);
-          }
-          dispatch(setCurrentUser(user));
-      });
-      return unsubscribe;
+      dispatch(checkUserSession());
   },[])
 
   return (

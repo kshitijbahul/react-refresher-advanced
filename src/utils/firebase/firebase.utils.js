@@ -73,18 +73,6 @@ const getCategoriesAndDocuments = async () => {
     const queryRef = query(collectionRef);
     const querySnapshot = await getDocs(queryRef);
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()); 
-    
-    
-    /* const collectionRef = collection(db, 'categories');
-    const queryRef = query(collectionRef);
-    const querySnapshot = await getDocs(queryRef);
-    
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot)=> {
-        const {title, items } = docSnapshot.data();
-        acc[title.toLowerCase()] = items;
-        return acc;
-    }, {});
-    return categoryMap; */
 }
 
 const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
@@ -106,7 +94,7 @@ const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
             console.error('Error creating user', error.message);
         }
     }
-    return userDocRef;
+    return userSnapShot;
 }
 
 
@@ -133,7 +121,14 @@ const signOutUser = async () => signOut(auth);
 
 const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback); 
 
-
+export const getCurrentUser = () => {
+    return new Promise((resolve,reject)=>{
+        const unsubscribe = onAuthStateChanged(auth, (userAuth)=> {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+}
 
 
 export {

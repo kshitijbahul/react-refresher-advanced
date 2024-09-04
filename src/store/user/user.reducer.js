@@ -4,6 +4,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 
 const INITIAl_STATE = {
     currentUser: null,
+    isLoading: false,
+    error: null,
 }
 
 
@@ -19,10 +21,15 @@ const INITIAl_STATE = {
 export const userReducer = (state = INITIAl_STATE , action ={}) => {
     const { type, payload } = action;
     switch(type){
-        case USER_ACTION_TYPES.SET_CURRENT_USER:
+        case USER_ACTION_TYPES.SIGNIN_SUCCESS:
             return {
                 ...state, // Get everything in the state , and only update the values that you need to update
                 currentUser: payload,
+            };
+        case USER_ACTION_TYPES.SIGNIN_FAILED:
+            return {
+                ...state, // Get everything in the state , and only update the values that you need to update
+                error: payload,
             };
         default:
             /* 
