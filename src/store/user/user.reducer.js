@@ -1,4 +1,5 @@
-import { USER_ACTION_TYPES } from "./user.types";
+// import { USER_ACTION_TYPES } from "./user.types";
+import { createSlice } from "@reduxjs/toolkit";
 /// This is same as what we had in context but some changes 
 
 
@@ -6,34 +7,17 @@ const INITIAl_STATE = {
     currentUser: null,
 }
 
+//Create Slice creates actions and reducers for us
 
-
-
-/* 
-    CHANGE 1: 
-    We do this because now we don't use the useReducer hook, 
-    so there is nothing to set the initial value of the state
-    Hence we now pass the initial value of the state as the default value
-*/
-//const userReducer = (state , action) => {
-export const userReducer = (state = INITIAl_STATE , action ={}) => {
-    const { type, payload } = action;
-    switch(type){
-        case USER_ACTION_TYPES.SET_CURRENT_USER:
-            return {
-                ...state, // Get everything in the state , and only update the values that you need to update
-                currentUser: payload,
-            };
-        default:
-            /* 
-                CHANGE 2: 
-                Since each reducer will get all the actions fired, 
-                it is important that we return the state as it is from the reducer to indicate to react 
-                that nothing has changed and hence 
-                control the re-rendering of the component
-            */
-            //throw new Error(`Unknown action type: ${type} in userReducer`);
-            return state;
+export const userSlice = createSlice({
+    name: 'user',
+    initialState: INITIAl_STATE,
+    reducers: {
+        setCurrentUser: (state,action) => {
+            state.currentUser = action.payload;// under the hood redux toolkit returns a new state object and actually doesn't perform a mutation
+        }
     }
-    
-}
+})
+
+export const { setCurrentUser } = userSlice.actions;
+export const userReducer = userSlice.reducer;
