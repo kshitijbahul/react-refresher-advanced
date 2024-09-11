@@ -1,8 +1,9 @@
 import { compose, createStore, applyMiddleware } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
+import { configureStore } from "@reduxjs/toolkit";
+//import { persistStore, persistReducer } from "redux-persist";
 import { logger } from 'redux-logger';
 import { rootReducer } from './root-reducer';
-import storage from "redux-persist/lib/storage";
+//import storage from "redux-persist/lib/storage";
 // rootReducer
 
 
@@ -24,19 +25,26 @@ const loggerMiddleware = (store) => (next) => (action) => {
 
 }
 
-const persistConfig = {
+/* const persistConfig = {
     key: 'root',
     storage,
     blacklist: ['user'],
-}
+} */
 
 
-const persistantReducer = persistReducer(persistConfig, rootReducer);
+//const persistantReducer = persistReducer(persistConfig, rootReducer);
 
-const middleware = [loggerMiddleware];
+const middlewares = [loggerMiddleware];
 
-const composedEnhancers = compose(applyMiddleware(...middleware));
+//const composedEnhancers = compose(applyMiddleware(...middleware));
 
-export const store = createStore(persistantReducer, undefined, composedEnhancers);
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleWare)=> getDefaultMiddleWare({
+        serializableCheck: false // If we want to toggle this check
+    }).concat(middlewares),// by default redux toolkit comes up with thunk
+});
 
-export const persistor = persistStore(store);
+//createStore(persistantReducer, undefined, composedEnhancers);
+
+// export const persistor = persistStore(store);

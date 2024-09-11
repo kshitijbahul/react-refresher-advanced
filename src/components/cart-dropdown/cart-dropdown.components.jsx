@@ -6,7 +6,7 @@ import CartItem from '../cart-item/cart-item.component';
 import {CartDropdownContainer,EmptyMessage, CartItems} from './cart-dropdown.styles.jsx';
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartOpened } from '../../store/cart/cart.selector.js';
-import { toggleCartShown } from '../../store/cart/cart.actions';
+import { toggleCartShown } from '../../store/cart/cart.reducer';
 
 
 

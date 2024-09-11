@@ -1,6 +1,6 @@
-import { CART_ACTION_TYPES } from './cart.types';
+// import { CART_ACTION_TYPES } from './cart.types';
 
-const addCartItem = (cartItems, productToAdd) => {
+export const addCartItem = (cartItems, productToAdd) => {
     const existingItem = cartItems.find(
         (eachItem) => eachItem.id === productToAdd.id
     );
@@ -14,10 +14,10 @@ const addCartItem = (cartItems, productToAdd) => {
     
 }
 
-const removeCartItem = (cartItems,removedProduct) => {
+export const removeCartItem = (cartItems,removedProduct) => {
     return cartItems.filter(( cardItem )=> cardItem.id !== removedProduct.id);
 }
-const decreaseCartItem = (cartItems,removedProduct) =>  {
+export const decreaseCartItem = (cartItems,removedProduct) =>  {
     const cartElement = cartItems.find((cartItem) => cartItem.id === removedProduct.id );
     if (cartElement.quantity === 1) {
         return removeCartItem(cartItems,removedProduct);
@@ -28,7 +28,7 @@ const decreaseCartItem = (cartItems,removedProduct) =>  {
         return newCartItems;
     }
 }
-
+/* 
 export const setCartItems = (cartItems) => {
     return {
         type: CART_ACTION_TYPES.SET_CART_ITEMS,
@@ -65,4 +65,4 @@ export const decreaseItemsFromCart = (cartItems, removedProduct) => {
         payload: decreaseCartItem(cartItems, removedProduct),
     }
 }
-
+ */

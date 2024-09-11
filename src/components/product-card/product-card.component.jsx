@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {BUTTON_TYPE_CLASSES} from '../button/button.component';
-import {ProductCardContainer, Image, StyledButton,Footer} from './product-card.styles.jsx';
-import { addItemToCart } from '../../store/cart/cart.actions.js';
-import { selectCartItems } from '../../store/cart/cart.selector.js';
+import {ProductCardContainer, Image, StyledButton,Footer} from './product-card.styles';
+import { addItemToCart } from '../../store/cart/cart.reducer';
+import { selectCartItems } from '../../store/cart/cart.selector';
 
 const ProductCard = ({product}) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems)
     const { name, imageUrl, price } = product;
     const handleAddToCart = () => {
-        dispatch(addItemToCart(cartItems,product));
+        console.log("handleAddToCart to cart >>>>>>>>>>>>>",product);
+        dispatch(addItemToCart(product));
     };
     return (
         <ProductCardContainer>

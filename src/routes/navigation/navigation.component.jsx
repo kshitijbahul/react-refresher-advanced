@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -18,7 +18,6 @@ const Navigation = () => {
     const signOutHandler = async () => {
        await signOutUser();
     };
-
     return (
     <Fragment>
         <NavigationContainer>

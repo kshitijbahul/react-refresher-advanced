@@ -1,13 +1,69 @@
-import { set } from 'firebase/database';
-import { CART_ACTION_TYPES } from './cart.types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAl_STATE = {
     cartOpened: false,
     cartItems: [],
 }
+const addCartItem = (cartItems, productToAdd) => {
+    const existingItem = cartItems.find(
+        (eachItem) => eachItem.id === productToAdd.id
+    );
+    if(existingItem){
+        return cartItems.map(
+            (eachItem) =>  eachItem.id === productToAdd.id ? {...eachItem, quantity : eachItem.quantity+1} : eachItem
+            
+        );
+    }
+    return [...cartItems, {...productToAdd, quantity: 1}];
+    
+}
 
- 
+const removeCartItem = (cartItems,removedProduct) => {
+    return cartItems.filter(( cardItem )=> cardItem.id !== removedProduct.id);
+}
+const decreaseCartItem = (cartItems,removedProduct) =>  {
+    const cartElement = cartItems.find((cartItem) => cartItem.id === removedProduct.id );
+    if (cartElement.quantity === 1) {
+        return removeCartItem(cartItems,removedProduct);
+    } else {
+        const newCartItems = cartItems.map((cartItem) => 
+            cartItem.id === removedProduct.id ? {...cartItem,quantity: cartItem.quantity-1} : cartItem
+        );
+        return newCartItems;
+    }
+}
 
+const categorySlice = createSlice({
+    name: 'cart',
+    initialState: INITIAl_STATE,
+    reducers: {
+        setCartItems: (state,action) => {
+            console.log('in setCartItems the action is ', action);
+            state.cartItems = action.payload;
+        },
+        toggleCartShown: (state,action) => {
+            console.log('in toggleCartShown the action is >>>>', action);
+            state.cartOpened = !action.payload;
+        },
+        addItemToCart: (state,action) => {
+            state.cartItems = addCartItem(state.cartItems,action.payload);
+        },
+        removeItemsFromCart: (state,action) => {
+            console.log('in addItemToCart the state is ', state);
+            console.log('in addItemToCart the action is ', action);
+            state.cartItems = removeCartItem(state.cartItems,action.payload);
+        },
+        decreaseItemsFromCart: (state, action) => {
+            console.log('in addItemToCart the state is ', state);
+            console.log('in addItemToCart the action is ', action);
+            state.cartItems = decreaseCartItem(state.cartItems, action.payload);
+        }
+    }
+ });
+
+ export const {setCartItems, toggleCartShown, addItemToCart, removeItemsFromCart, decreaseItemsFromCart} = categorySlice.actions;
+ export const cartReducer = categorySlice.reducer;
+/* 
 export const cartReducer = (state = INITIAl_STATE, action = {}) => {
     const {type, payload} = action;
     switch (type) {
@@ -39,4 +95,4 @@ export const cartReducer = (state = INITIAl_STATE, action = {}) => {
         default:
             return state;
     }
-}
+} */
